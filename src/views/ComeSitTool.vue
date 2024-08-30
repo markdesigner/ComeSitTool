@@ -211,11 +211,13 @@ export default {
       alert("複製失敗");
     },
     async generatePwd() {
+      const BOOKING_FORWARD_TIME = 60 * 60 * 1000;
+      const BOOKING_BACKWARD_TIME = 60 * 60 * 1000;
       this.checkLockService();
       this.lockService.setName(this.guestName)
       this.lockService.setTimeMap({
-        start: new Date(this.bookingTime.start).getTime(),
-        end: new Date(this.bookingTime.end).getTime(),
+        start: new Date(this.bookingTime.start).getTime() - BOOKING_FORWARD_TIME,
+        end: new Date(this.bookingTime.end).getTime() + BOOKING_BACKWARD_TIME,
       })
       const pwd = await this.lockService.getPwd()
       this.lockPassword= pwd;
