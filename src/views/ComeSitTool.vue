@@ -67,9 +67,13 @@
 import dayJs from "dayjs";
 import "dayjs/locale/zh-tw";
 import LockService from '@/utils/LockService';
+import { DatePicker } from 'v-calendar';
 
 export default {
   name: "CopyTool",
+  components: {
+    VDatePicker: DatePicker,
+  },
   data() {
     return {
       guestName: "",
