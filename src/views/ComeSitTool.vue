@@ -68,6 +68,7 @@ import dayJs from "dayjs";
 import "dayjs/locale/zh-tw";
 import LockService from "@/utils/LockService";
 import { DatePicker } from "v-calendar";
+import { BOOKING_TEXT } from "@/constants/messages";
 
 export default {
   name: "CopyTool",
@@ -147,13 +148,7 @@ export default {
       this.copyBookingText();
     },
     handleBookingText() {
-      this.bookingText = `已經幫您預約囉，那再麻煩三日內幫我匯款${
-        this.peopleNumber * 250
-      }元到以下戶頭後，或是Line 加入來坐好友Line Pay(一卡通money)轉帳給我： https://line.me/ti/p/cJ2V_nDAzF
-完成後我會傳送入場資訊與密碼給您。非常感謝
-
-銀行代號 007 （第一銀行）
-帳號40157027386`;
+      this.bookingText = BOOKING_TEXT({ amount: this.peopleNumber * 250 });
     },
     async copyBookingText() {
       await this.$copyText(this.bookingText).catch(() => {
