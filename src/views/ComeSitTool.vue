@@ -2,7 +2,7 @@
   <div class="CopyTool">
     <div class="booking-container">
       <div class="people">
-        人數：<input type="number" v-model="peopleNumber" placeholder="人數">
+        人數：<input type="number" v-model="peopleNumber" placeholder="人數" />
       </div>
       <textarea class="copyArea" v-model="bookingText"></textarea>
       <div class="CopyTool__ProduceButton">
@@ -66,10 +66,14 @@
 <script>
 import dayJs from "dayjs";
 import "dayjs/locale/zh-tw";
-import LockService from '@/utils/LockService';
+import LockService from "@/utils/LockService";
+import { DatePicker } from "v-calendar";
 
 export default {
   name: "CopyTool",
+  components: {
+    VDatePicker: DatePicker,
+  },
   data() {
     return {
       guestName: "",
@@ -86,12 +90,14 @@ export default {
       period: "whole",
       days: [],
       peopleNumber: 5,
-      bookingText: '',
+      bookingText: "",
       lockService: null,
     };
   },
   created() {
     dayJs.locale("zh-tw");
+    this.checkLockService();
+
     global.vuecp = this;
   },
   watch: {
@@ -141,11 +147,13 @@ export default {
       this.copyBookingText();
     },
     handleBookingText() {
-      this.bookingText =`已經幫您預約囉，那再麻煩三日內幫我匯款${this.peopleNumber * 250}元到以下戶頭後，或是Line 加入來坐好友Line Pay(一卡通money)轉帳給我(https://line.me/ti/p/Cjwh2O1BL6)。
+      this.bookingText = `已經幫您預約囉，那再麻煩三日內幫我匯款${
+        this.peopleNumber * 250
+      }元到以下戶頭後，或是Line 加入來坐好友Line Pay(一卡通money)轉帳給我： https://line.me/ti/p/cJ2V_nDAzF
 完成後我會傳送入場資訊與密碼給您。非常感謝
 
 銀行代號 007 （第一銀行）
-帳號40157027386`
+帳號40157027386`;
     },
     async copyBookingText() {
       await this.$copyText(this.bookingText).catch(() => {
@@ -183,6 +191,8 @@ export default {
 
 📌飛鏢機使用教學：https://youtu.be/qDS5eHW8qmE
 
+📌投影機沒有聲音如何解決： https://youtu.be/o93hvL1qZ2o
+
 🪑入場須知：
 
   冷氣和燈光都可以自行開關調整，最後離場時再幫我們都關掉就好。冰箱也可以使用（但冰箱裡的東西沒有提供😊）。
@@ -211,20 +221,22 @@ export default {
       alert("複製失敗");
     },
     async generatePwd() {
-      this.checkLockService();
-      this.lockService.setName(this.guestName)
+      const BOOKING_FORWARD_TIME = 60 * 60 * 1000;
+      const BOOKING_BACKWARD_TIME = 60 * 60 * 1000;
+      this.lockService.setName(this.guestName);
       this.lockService.setTimeMap({
-        start: new Date(this.bookingTime.start).getTime(),
-        end: new Date(this.bookingTime.end).getTime(),
-      })
-      const pwd = await this.lockService.getPwd()
-      this.lockPassword= pwd;
+        start:
+          new Date(this.bookingTime.start).getTime() - BOOKING_FORWARD_TIME,
+        end: new Date(this.bookingTime.end).getTime() + BOOKING_BACKWARD_TIME,
+      });
+      const pwd = await this.lockService.getPwd();
+      this.lockPassword = pwd;
     },
     checkLockService() {
-      if(!this.lockService) {
+      if (!this.lockService) {
         this.lockService = new LockService();
       }
-    }
+    },
   },
   computed: {
     arrangeBookingDate() {
