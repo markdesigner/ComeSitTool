@@ -3,9 +3,9 @@ import axios from "axios";
 export default class LockService {
   constructor() {
     this.timeMap = null;
-    this.clientId = "fcef9796165d409da004baabedd00bef";
+    this.clientId = process.env.VUE_APP_TTLOCK_CLIENT_ID;
     this.accessToken = "";
-    this.lockId = "2986231";
+    this.lockId = process.env.VUE_APP_TTLOCK_LOCK_ID;
     this.pwdType = 3;
     this.pwdName = "";
     this.getAuth();
@@ -26,9 +26,9 @@ export default class LockService {
         "https://cnapi.ttlock.com/oauth2/token",
         {
           clientId: this.clientId,
-          clientSecret: "6fce8190478d93a4c7e398468f13c698",
-          username: "weisheng1202@gmail.com",
-          password: "AEB70A88190F288F0D78A2E2180B05D9",
+          clientSecret: process.env.VUE_APP_TTLOCK_CLIENT_SECRET,
+          username: process.env.VUE_APP_TTLOCK_USERNAME,
+          password: process.env.VUE_APP_TTLOCK_PASSWORD,
         },
         {
           headers: {
