@@ -20,7 +20,6 @@ export default class LockService {
   }
 
   async getAuth() {
-    console.log("getAuth");
     return await axios
       .post(
         "https://cnapi.ttlock.com/oauth2/token",
@@ -37,9 +36,7 @@ export default class LockService {
         }
       )
       .then((res) => {
-        console.log(res, "res");
         this.accessToken = res.data.access_token;
-        console.log(this.accessToken, "this.accessToken");
       });
   }
 
@@ -61,7 +58,6 @@ export default class LockService {
         },
       })
       .then((res) => {
-        console.log(res, "res");
         return res.data.keyboardPwd;
       });
   }
