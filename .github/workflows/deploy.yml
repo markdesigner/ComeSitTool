@@ -22,6 +22,12 @@ jobs:
         run: npm install
 
       - name: Build
+        env:
+          VUE_APP_TTLOCK_CLIENT_ID: ${{ secrets.TTLOCK_CLIENT_ID }}
+          VUE_APP_TTLOCK_CLIENT_SECRET: ${{ secrets.TTLOCK_CLIENT_SECRET }}
+          VUE_APP_TTLOCK_USERNAME: ${{ secrets.TTLOCK_USERNAME }}
+          VUE_APP_TTLOCK_PASSWORD: ${{ secrets.TTLOCK_PASSWORD }}
+          VUE_APP_TTLOCK_LOCK_ID: ${{ secrets.TTLOCK_LOCK_ID }}
         run: npm run build
 
       - name: Set git user
