@@ -1,0 +1,399 @@
+// RWD 斷點變數
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1400px;
+
+// RWD Mixins
+@mixin mobile {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: #{$breakpoint-sm - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-sm}) and (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin mobile-and-tablet {
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-and-desktop {
+  @media (min-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+@mixin xl-desktop {
+  @media (min-width: #{$breakpoint-xl}) {
+    @content;
+  }
+}
+
+// 方向檢測
+@mixin portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+// 高DPI螢幕
+@mixin retina {
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    @content;
+  }
+}
+
+// 觸控設備
+@mixin touch {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+// 非觸控設備
+@mixin no-touch {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+// 通用RWD工具類
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  
+  @include mobile {
+    padding: 0 15px;
+  }
+}
+
+.responsive-grid {
+  display: grid;
+  gap: 20px;
+  
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  @include desktop {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+}
+
+.responsive-flex {
+  display: flex;
+  
+  @include mobile {
+    flex-direction: column;
+  }
+  
+  @include tablet {
+    flex-wrap: wrap;
+  }
+  
+  @include desktop {
+    flex-direction: row;
+  }
+}
+
+// 隱藏/顯示工具類
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.hidden-tablet {
+  @include tablet {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @include desktop {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  display: none;
+  
+  @include mobile {
+    display: block !important;
+  }
+}
+
+.visible-tablet {
+  display: none;
+  
+  @include tablet {
+    display: block !important;
+  }
+}
+
+.visible-desktop {
+  display: none;
+  
+  @include desktop {
+    display: block !important;
+  }
+}
+
+// 文字大小工具類
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+@include mobile {
+  .text-mobile-xs { font-size: 0.75rem; }
+  .text-mobile-sm { font-size: 0.875rem; }
+  .text-mobile-base { font-size: 1rem; }
+  .text-mobile-lg { font-size: 1.125rem; }
+  .text-mobile-xl { font-size: 1.25rem; }
+}
+
+@include tablet {
+  .text-tablet-xs { font-size: 0.75rem; }
+  .text-tablet-sm { font-size: 0.875rem; }
+  .text-tablet-base { font-size: 1rem; }
+  .text-tablet-lg { font-size: 1.125rem; }
+  .text-tablet-xl { font-size: 1.25rem; }
+  .text-tablet-2xl { font-size: 1.5rem; }
+}
+
+@include desktop {
+  .text-desktop-xs { font-size: 0.75rem; }
+  .text-desktop-sm { font-size: 0.875rem; }
+  .text-desktop-base { font-size: 1rem; }
+  .text-desktop-lg { font-size: 1.125rem; }
+  .text-desktop-xl { font-size: 1.25rem; }
+  .text-desktop-2xl { font-size: 1.5rem; }
+}
+
+// 間距工具類
+.spacing-xs { margin: 0.25rem; }
+.spacing-sm { margin: 0.5rem; }
+.spacing-md { margin: 1rem; }
+.spacing-lg { margin: 1.5rem; }
+.spacing-xl { margin: 2rem; }
+
+@include mobile {
+  .spacing-mobile-xs { margin: 0.25rem; }
+  .spacing-mobile-sm { margin: 0.5rem; }
+  .spacing-mobile-md { margin: 0.75rem; }
+  .spacing-mobile-lg { margin: 1rem; }
+  .spacing-mobile-xl { margin: 1.5rem; }
+}
+
+@include tablet {
+  .spacing-tablet-xs { margin: 0.25rem; }
+  .spacing-tablet-sm { margin: 0.5rem; }
+  .spacing-tablet-md { margin: 1rem; }
+  .spacing-tablet-lg { margin: 1.5rem; }
+  .spacing-tablet-xl { margin: 2rem; }
+}
+
+@include desktop {
+  .spacing-desktop-xs { margin: 0.25rem; }
+  .spacing-desktop-sm { margin: 0.5rem; }
+  .spacing-desktop-md { margin: 1rem; }
+  .spacing-desktop-lg { margin: 1.5rem; }
+  .spacing-desktop-xl { margin: 2rem; }
+}
+
+// 觸控友好的按鈕和輸入框
+.touch-friendly {
+  @include touch {
+    min-height: 44px;
+    min-width: 44px;
+    font-size: 16px; // 防止iOS縮放
+  }
+}
+
+// 響應式圖片
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// 響應式視頻
+.responsive-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; // 16:9 比例
+  
+  iframe, video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// 響應式表格
+.responsive-table {
+  width: 100%;
+  overflow-x: auto;
+  
+  table {
+    min-width: 600px;
+  }
+}
+
+// 響應式卡片
+.responsive-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  
+  @include mobile {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  @include tablet {
+    padding: 18px;
+  }
+}
+
+// 響應式導航
+.responsive-nav {
+  @include mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// 響應式側邊欄
+.responsive-sidebar {
+  @include mobile {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    transition: left 0.3s ease;
+    z-index: 1001;
+    
+    &.open {
+      left: 0;
+    }
+  }
+}
+
+// 響應式模態框
+.responsive-modal {
+  @include mobile {
+    .modal-content {
+      margin: 20px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+    }
+  }
+}
+
+// 響應式表單
+.responsive-form {
+  .form-group {
+    margin-bottom: 20px;
+    
+    @include mobile {
+      margin-bottom: 15px;
+    }
+  }
+  
+  input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px; // 防止iOS縮放
+    
+    @include mobile {
+      padding: 15px;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: #1d80ff;
+      box-shadow: 0 0 0 2px rgba(30, 128, 255, 0.2);
+    }
+  }
+  
+  button {
+    @include touch {
+      min-height: 48px;
+      font-size: 16px;
+    }
+  }
+} 

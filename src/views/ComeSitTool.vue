@@ -259,23 +259,286 @@ export default {
   width: 90vw;
   height: 100vh;
   margin: 0 auto;
+
+  @include mobile {
+    width: 95vw;
+    height: auto;
+    min-height: 100vh;
+    padding: 10px;
+  }
+
+  @include tablet {
+    width: 92vw;
+  }
+
   .booking-container {
     margin: 50px;
+
+    @include mobile {
+      margin: 20px 10px;
+    }
+
+    @include tablet {
+      margin: 30px 20px;
+    }
+
+    .people {
+      margin-bottom: 15px;
+      font-size: 16px;
+
+      @include mobile {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      input {
+        margin-left: 10px;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+
+        @include mobile {
+          width: 80px;
+          padding: 10px;
+          font-size: 16px; // 防止iOS縮放
+        }
+      }
+    }
+
     .copyArea {
       margin: 20px 0;
       width: 600px;
+      height: 150px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      resize: vertical;
+
+      @include mobile {
+        width: 100%;
+        height: 120px;
+        margin: 15px 0;
+        padding: 12px;
+        font-size: 16px; // 防止iOS縮放
+      }
+
+      @include tablet {
+        width: 100%;
+        max-width: 500px;
+      }
     }
   }
+
   .container {
     display: flex;
     justify-content: center;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    @include tablet {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
     .input__item {
+      margin: 0 10px;
+
+      @include mobile {
+        margin: 0;
+        width: 100%;
+        max-width: 350px;
+      }
+
+      @include tablet {
+        margin: 0 5px;
+        flex: 1;
+        min-width: 200px;
+      }
+
+      &.textInput {
+        @include mobile {
+          order: 1;
+        }
+
+        .textInput__item {
+          margin-bottom: 15px;
+
+          @include mobile {
+            margin-bottom: 12px;
+          }
+
+          input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+
+            @include mobile {
+              padding: 15px;
+              font-size: 16px; // 防止iOS縮放
+            }
+
+            &:focus {
+              outline: none;
+              border-color: #1d80ff;
+              box-shadow: 0 0 0 2px rgba(30, 128, 255, 0.2);
+            }
+          }
+        }
+
+        .periodSelect-container {
+          select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+
+            @include mobile {
+              padding: 15px;
+              font-size: 16px; // 防止iOS縮放
+            }
+
+            &:focus {
+              outline: none;
+              border-color: #1d80ff;
+              box-shadow: 0 0 0 2px rgba(30, 128, 255, 0.2);
+            }
+          }
+        }
+      }
     }
   }
 
   &__textBlock {
     width: 100%;
     height: 400px;
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+
+    @include mobile {
+      height: 300px;
+      margin: 15px 0;
+      padding: 12px;
+      font-size: 16px; // 防止iOS縮放
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #1d80ff;
+      box-shadow: 0 0 0 2px rgba(30, 128, 255, 0.2);
+    }
+  }
+
+  &__ProduceButton {
+    text-align: center;
+    margin: 20px 0;
+
+    @include mobile {
+      margin: 15px 0;
+    }
+
+    button {
+      background-color: #1d80ff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      @include mobile {
+        width: 100%;
+        max-width: 300px;
+        padding: 15px 20px;
+        font-size: 16px;
+        min-height: 48px; // 觸控友好的最小高度
+      }
+
+      &:hover {
+        background-color: #1670e6;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(29, 128, 255, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(29, 128, 255, 0.3);
+      }
+    }
+  }
+}
+
+// v-calendar 響應式優化
+:deep(.vc-container) {
+  @include mobile {
+    font-size: 14px;
+
+    .vc-header {
+      padding: 10px;
+    }
+
+    .vc-weeks {
+      padding: 0 5px;
+    }
+
+    .vc-day {
+      min-height: 35px;
+      font-size: 13px;
+    }
+  }
+}
+
+// 移動端優化
+@media (max-width: 768px) {
+  .CopyTool {
+    .container {
+      .input__item {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .booking-container {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+// 平板優化
+@media (min-width: 769px) and (max-width: 1024px) {
+  .CopyTool {
+    .container {
+      .input__item {
+        background: #fafafa;
+        padding: 20px;
+        border-radius: 8px;
+      }
+    }
+
+    .booking-container {
+      background: #fafafa;
+      padding: 25px;
+      border-radius: 8px;
+    }
   }
 }
 </style>
