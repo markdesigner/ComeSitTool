@@ -26,9 +26,25 @@ export default {
 
 <style lang="scss">
 @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap);
+
 * {
   font-family: "Noto Sans TC", sans-serif !important;
   font-weight: 500;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+
+  @include mobile {
+    font-size: 14px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 #app {
@@ -36,6 +52,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.appContent {
+  flex: 1;
+  padding: 0 20px;
+
+  @include mobile {
+    padding: 0 10px;
+  }
 }
 
 #nav {

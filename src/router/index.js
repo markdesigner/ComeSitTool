@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import ComeSitTool from "../views/ComeSitTool.vue";
 import TestPage from "../views/TestPage.vue";
 import HouseTool from "../views/HouseTool.vue";
+import RWDTest from "../views/RWDTest.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/HouseTool",
     name: "HouseTool",
     component: HouseTool,
+  },
+  {
+    path: "/RWDTest",
+    name: "RWDTest",
+    component: RWDTest,
   },
 ];
 
