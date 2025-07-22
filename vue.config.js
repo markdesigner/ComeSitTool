@@ -3,4 +3,14 @@
 module.exports = {
   // publicPath 為 project-name，根目錄地址為上傳的網域
   publicPath: "/ComeSitTool/",
+
+  // 全局SCSS設定
+  css: {
+    loaderOptions: {
+      scss: {
+        // 全局引入RWD工具類
+        prependData: `@import "@/assets/styles/rwd.scss";`,
+      },
+    },
+  },
 };

@@ -26,8 +26,6 @@ export default {
 
 <style lang="scss">
 @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap);
-// 全局引入RWD工具類，所有組件都可以直接使用
-@import "@/assets/styles/rwd.scss";
 
 * {
   font-family: "Noto Sans TC", sans-serif !important;
