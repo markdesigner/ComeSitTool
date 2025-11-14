@@ -9,6 +9,15 @@
         <button @click="handleGenerateAndCopyBooking">一鍵生成與複製</button>
       </div>
     </div>
+    <div class="booking-container">
+      <div class="people">
+        人數：<input type="number" v-model="peopleNumber" placeholder="人數" />
+      </div>
+      <textarea class="copyArea" v-model="bookingTextV2"></textarea>
+      <div class="CopyTool__ProduceButton">
+        <button @click="handleGenerateAndCopyBookingV2">一鍵生成與複製</button>
+      </div>
+    </div>
     <div class="container">
       <div class="input__item textInput">
         <div class="textInput__item">
@@ -68,7 +77,7 @@ import dayJs from "dayjs";
 import "dayjs/locale/zh-tw";
 import LockService from "@/utils/LockService";
 import { DatePicker } from "v-calendar";
-import { BOOKING_TEXT } from "@/constants/messages";
+import { BOOKING_TEXT, BOOKING_TEXT_V2 } from "@/constants/messages";
 
 export default {
   name: "CopyTool",
@@ -91,7 +100,9 @@ export default {
       period: "whole",
       days: [],
       peopleNumber: 5,
+      peopleNumberV2: 5,
       bookingText: "",
+      bookingTextV2: "",
       lockService: null,
     };
   },
@@ -147,11 +158,25 @@ export default {
       this.handleBookingText();
       this.copyBookingText();
     },
+    handleGenerateAndCopyBookingV2() {
+      this.handleBookingTextV2();
+      this.copyBookingTextV2();
+    },
     handleBookingText() {
       this.bookingText = BOOKING_TEXT({ amount: this.peopleNumber * 250 });
     },
+    handleBookingTextV2() {
+      this.bookingTextV2 = BOOKING_TEXT_V2({
+        amount: this.peopleNumberV2 * 250,
+      });
+    },
     async copyBookingText() {
       await this.$copyText(this.bookingText).catch(() => {
+        throw new Error("copy error");
+      });
+    },
+    async copyBookingTextV2() {
+      await this.$copyText(this.bookingTextV2).catch(() => {
         throw new Error("copy error");
       });
     },
