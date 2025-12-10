@@ -2,16 +2,11 @@
   <div class="CopyTool">
     <div class="booking-container">
       <div class="people">
-        人數：<input type="number" v-model="peopleNumber" placeholder="人數" />
-      </div>
-      <textarea class="copyArea" v-model="bookingText"></textarea>
-      <div class="CopyTool__ProduceButton">
-        <button @click="handleGenerateAndCopyBooking">一鍵生成與複製</button>
-      </div>
-    </div>
-    <div class="booking-container">
-      <div class="people">
-        人數：<input type="number" v-model="peopleNumber" placeholder="人數" />
+        人數：<input
+          type="number"
+          v-model="peopleNumberV2"
+          placeholder="人數"
+        />
       </div>
       <textarea class="copyArea" v-model="bookingTextV2"></textarea>
       <div class="CopyTool__ProduceButton">
@@ -150,7 +145,7 @@ export default {
       }
     },
     async handleGenerateAndCopy() {
-      await this.generatePwd();
+      // await this.generatePwd();
       this.handleProduceText();
       this.copy();
     },
@@ -215,24 +210,28 @@ export default {
 
 🪑入場須知：
 
-  冷氣和燈光都可以自行開關調整，最後離場時再幫我們都關掉就好。冰箱也可以使用（但冰箱裡的東西沒有提供😊）。
+冷氣和燈光都可以自行開關，最後離場時再幫我們都關掉就好。冰箱也可以使用（但冰箱裡的東西沒有提供😊）。
 
-  入場後樓下有來坐專屬鞋櫃，再幫我們直接穿鞋走樓梯下樓即可呦～
+入場後樓下有來坐專屬鞋櫃，再幫我們直接穿鞋走樓梯下樓即可呦～
 
-  另外為保持場地品質，來坐一律不能吸菸、喝酒、開伙和砸派呦。
+另外為保持場地品質，來坐一律不能吸菸、喝酒、開伙和砸派呦。
 
-  離場前再麻煩幫忙把使用的垃圾、回收分類在桶子內。
+樓下的門在使用時請幫我們關上～
 
-  使用過的餐具也幫我們集中到白色餐車上。
+使用過的餐具也幫我們集中到白色餐車上。若有廚餘請集中到同一容器，並放在桌上即可。
 
-  樓下的門也幫我們打開著就可以了呦～
+🪑離場叮嚀：
+
+檢查隨身物品，以及充電線或是冰箱內的物品是否都有帶到～
+
+並幫我們確認冷氣和燈都有關閉。樓下的門開著就可以囉～
 
 🪑停車資訊：
 
   騎機車的朋友們可以直接停來坐招牌前方與正門口，並請勿鎖龍頭。
 
   開車的朋友可停附近貴和停車場(無特約)、和周邊停車格呦!
-  （https://goo.gl/maps/N3zEHZVsP1JsHGNQ7)
+  (https://goo.gl/maps/N3zEHZVsP1JsHGNQ7)
 
 🪑若到現場有任何狀況或問題，都歡迎隨時在這告知我們，我們會立馬回覆處理唷！
 祝您有個愉快的一天❤️
