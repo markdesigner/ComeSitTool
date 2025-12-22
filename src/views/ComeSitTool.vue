@@ -145,7 +145,7 @@ export default {
       }
     },
     async handleGenerateAndCopy() {
-      // await this.generatePwd();
+      await this.generatePwd();
       this.handleProduceText();
       this.copy();
     },
