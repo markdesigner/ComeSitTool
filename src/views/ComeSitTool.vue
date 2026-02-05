@@ -72,7 +72,7 @@ import dayJs from "dayjs";
 import "dayjs/locale/zh-tw";
 import LockService from "@/utils/LockService";
 import { DatePicker } from "v-calendar";
-import { BOOKING_TEXT, BOOKING_TEXT_V2 } from "@/constants/messages";
+import { BOOKING_TEXT_V2 } from "@/constants/messages";
 
 export default {
   name: "CopyTool",
@@ -94,9 +94,7 @@ export default {
       isCustomizeTime: false,
       period: "whole",
       days: [],
-      peopleNumber: 5,
       peopleNumberV2: 5,
-      bookingText: "",
       bookingTextV2: "",
       lockService: null,
     };
@@ -149,25 +147,13 @@ export default {
       this.handleProduceText();
       this.copy();
     },
-    handleGenerateAndCopyBooking() {
-      this.handleBookingText();
-      this.copyBookingText();
-    },
     handleGenerateAndCopyBookingV2() {
       this.handleBookingTextV2();
       this.copyBookingTextV2();
     },
-    handleBookingText() {
-      this.bookingText = BOOKING_TEXT({ amount: this.peopleNumber * 250 });
-    },
     handleBookingTextV2() {
       this.bookingTextV2 = BOOKING_TEXT_V2({
         amount: this.peopleNumberV2 * 250,
-      });
-    },
-    async copyBookingText() {
-      await this.$copyText(this.bookingText).catch(() => {
-        throw new Error("copy error");
       });
     },
     async copyBookingTextV2() {
