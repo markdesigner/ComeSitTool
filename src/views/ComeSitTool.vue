@@ -64,6 +64,9 @@
       </button>
     </div>
     <div class="CopyTool__ProduceButton">
+      <button @click="copy">複製文字</button>
+    </div>
+    <div class="CopyTool__ProduceButton">
       <button @click="handleGenerateAndCopy">一鍵生成與複製</button>
     </div>
   </div>
