@@ -150,30 +150,62 @@ export default {
     async handleGenerateAndCopy() {
       await this.generatePwd();
       this.handleProduceText();
-      this.copy();
+      await this.copyToClipboard(this.dialogue);
     },
-    generateTextAndCopyFromProvidedInfo() {
+    async generateTextAndCopyFromProvidedInfo() {
       this.handleProduceText();
-      this.copy();
+      await this.copyToClipboard(this.dialogue);
     },
-    handleGenerateAndCopyBookingV2() {
+    async handleGenerateAndCopyBookingV2() {
       this.handleBookingTextV2();
-      this.copyBookingTextV2();
+      await this.copyToClipboard(this.bookingTextV2);
     },
     handleBookingTextV2() {
       this.bookingTextV2 = BOOKING_TEXT_V2({
         amount: this.peopleNumberV2 * 250,
       });
     },
-    async copyBookingTextV2() {
-      await this.$copyText(this.bookingTextV2).catch(() => {
-        throw new Error("copy error");
-      });
-    },
     async copy() {
-      await this.$copyText(this.dialogue).catch(() => {
-        throw new Error("copy error");
-      });
+      await this.copyToClipboard(this.dialogue);
+    },
+    async copyToClipboard(text) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+      } catch {
+        // Clipboard API 失敗（可能是使用者手勢已過期），改用 fallback
+      }
+      this.fallbackCopy(text);
+    },
+    fallbackCopy(text) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.cssText =
+        "position:fixed;top:0;left:0;width:1px;height:1px;padding:0;border:none;outline:none;box-shadow:none;opacity:0;";
+      document.body.appendChild(textarea);
+
+      const isIOS = /ipad|iphone|ipod/i.test(navigator.userAgent);
+      if (isIOS) {
+        textarea.contentEditable = true;
+        textarea.readOnly = true;
+        const range = document.createRange();
+        range.selectNodeContents(textarea);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        textarea.setSelectionRange(0, text.length);
+      } else {
+        textarea.select();
+      }
+
+      const success = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (!success) {
+        alert("複製失敗，請長按文字手動複製");
+      }
     },
     handleProduceText() {
       let textResult = `🪑感謝預約，這邊先給您入場資訊與密碼呦~
