@@ -2,6 +2,10 @@ module.exports = {
   root: true,
   env: {
     node: true,
+    browser: true,
+  },
+  globals: {
+    ClipboardItem: "readonly",
   },
   extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
   parserOptions: {

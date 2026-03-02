@@ -148,6 +148,21 @@ export default {
       }
     },
     async handleGenerateAndCopy() {
+      if (navigator.clipboard && window.ClipboardItem) {
+        const blobPromise = (async () => {
+          await this.generatePwd();
+          this.handleProduceText();
+          return new Blob([this.dialogue], { type: "text/plain" });
+        })();
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({ "text/plain": blobPromise }),
+          ]);
+          return;
+        } catch {
+          // ClipboardItem 方式失敗，走 fallback
+        }
+      }
       await this.generatePwd();
       this.handleProduceText();
       await this.copyToClipboard(this.dialogue);
