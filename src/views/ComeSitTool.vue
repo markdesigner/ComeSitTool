@@ -59,7 +59,9 @@
     </div>
     <textarea class="CopyTool__textBlock" v-model="dialogue"></textarea>
     <div class="CopyTool__ProduceButton">
-      <button @click="generatePwd">產生密碼</button>
+      <button @click="generateTextAndCopyFromProvidedInfo">
+        產生文字與複製
+      </button>
     </div>
     <div class="CopyTool__ProduceButton">
       <button @click="handleGenerateAndCopy">一鍵生成與複製</button>
@@ -144,6 +146,10 @@ export default {
     },
     async handleGenerateAndCopy() {
       await this.generatePwd();
+      this.handleProduceText();
+      this.copy();
+    },
+    generateTextAndCopyFromProvidedInfo() {
       this.handleProduceText();
       this.copy();
     },
