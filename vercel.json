@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/ttlock-api/:path*",
+      "destination": "https://cnapi.ttlock.com/:path*"
+    }
+  ]
+}

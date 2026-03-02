@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const TTLOCK_BASE = "/ttlock-api";
+
 export default class LockService {
   constructor() {
     this.timeMap = null;
@@ -22,7 +24,7 @@ export default class LockService {
   async getAuth() {
     return await axios
       .post(
-        "https://cnapi.ttlock.com/oauth2/token",
+        `${TTLOCK_BASE}/oauth2/token`,
         {
           clientId: this.clientId,
           clientSecret: process.env.VUE_APP_TTLOCK_CLIENT_SECRET,
@@ -45,7 +47,7 @@ export default class LockService {
       return;
     }
     return await axios
-      .get("https://cnapi.ttlock.com/v3/keyboardPwd/get", {
+      .get(`${TTLOCK_BASE}/v3/keyboardPwd/get`, {
         params: {
           clientId: this.clientId,
           accessToken: this.accessToken,
