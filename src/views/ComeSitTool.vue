@@ -242,13 +242,12 @@ export default {
 
 🪑這邊也提供設備的使用教學
 
-📌投影機使用教學：https://youtu.be/s1NzaJ8Ewsg
+📌投影機使用教學：https://youtube.com/shorts/1HlYVmfHF6A
 
 📌手機用音響播放音樂教學: https://youtu.be/CiyMo7gzvLQ
 
 📌飛鏢機使用教學：https://youtu.be/qDS5eHW8qmE
 
-📌投影機沒有聲音如何解決： https://youtu.be/o93hvL1qZ2o
 
 🪑入場須知：
 
